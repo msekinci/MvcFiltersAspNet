@@ -1,0 +1,56 @@
+﻿@model List<MvcFiltersAspNet.Models.Log>
+@{
+    ViewBag.Title = "ListLogs";
+}
+
+
+
+<div class="container row">
+    <br /><br />
+    @using (Html.BeginForm())
+    {
+        <div class="col-sm-3">
+            <label class="form-group-l">Search with Start and End Date</label>
+        </div>
+        <div class="col-sm-3">
+            <input class="form-control" name="startDate" type="datetime-local" placeholder="Start Date">
+        </div>
+        <div class="col-sm-3">
+            <input class="form-control" name="endDate" type="datetime-local" placeholder="End Date">
+        </div>
+        <div class="col-sm-3">
+            <input class="btn btn-success" type="submit" value="Search!">
+        </div>
+    }
+</div>
+
+<div class="container">
+    <h2>ListLogs</h2> <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Username</th>
+                <th scope="col">Action Name</th>
+                <th scope="col">Controller Name</th>
+                <th scope="col">Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Date</td>
+                    <td>@item.Username</td>
+                    <td>@item.ActionName</td>
+                    <td>@item.ControllerName</td>
+                    <td>@item.Report</td>
+                </tr>
+                }
+
+        </tbody>
+    </table>
+</div>
+

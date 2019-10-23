@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcFiltersAspNet.Filters;
+using MvcFiltersAspNet.Models.EntityModel;
 
 namespace MvcFiltersAspNet.Controllers
 {
@@ -27,6 +28,26 @@ namespace MvcFiltersAspNet.Controllers
         public ActionResult Index3()
         {
             return View();
+        }
+
+        public ActionResult ListLogs()
+        {
+            DatabaseContext db = new DatabaseContext();
+            var logs = db.Logs.OrderByDescending(s => s.Date).ToList();
+
+            return View(logs);
+        }
+        [HttpPost]
+        public ActionResult ListLogs(DateTime startDate, DateTime endDate)
+        {
+            DatabaseContext db = new DatabaseContext();
+            var query = from m in db.Logs
+                        where m.Date > startDate
+                        where m.Date < endDate
+                        orderby m.Date descending select m;
+
+            var list = query.ToList();
+            return View(list);
         }
     }
 }
